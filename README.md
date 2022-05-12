@@ -1,5 +1,5 @@
 # httpspam.cpp
-A DDOS tool for spamming GET or POST requests written in C++
+A DDOS tool for spamming GET and/or POST requests written in C++
 ```
 Usage: ./httpspam.exe [-m method] [-t count] -u target_url
 
