@@ -101,6 +101,7 @@ void post(std::string target) {
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, parse_response);
     curl_easy_setopt(curl, CURLOPT_USERAGENT, make_user_agent().c_str());
     curl_easy_perform(curl);
+    curl_easy_cleanup(curl);
   }
 }
 
