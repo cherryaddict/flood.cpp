@@ -9,9 +9,9 @@ Usage: ./httpspam.exe [-m method] [-t count] -u target_url
     -t            Number of threads to use. Default: 12
     -u            URL to attack
 
-Examples:
+  Examples:
 
-./httpspam.exe -u localhost
+    ./httpspam.exe -u localhost
 
-./httpspam.exe -m POST -t 48 -u localhost
+    ./httpspam.exe -m POST -t 48 -u localhost
 ```
