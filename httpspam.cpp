@@ -16,17 +16,17 @@ std::vector<std::string> tokens = { ".NET CLR", "SV1", "Tablet PC", "Win64; IA64
 std::vector<std::string> spiders = { "AdsBot-Google ( http://www.google.com/adsbot.html)", "Baiduspider ( http://www.baidu.com/search/spider.htm)", "FeedFetcher-Google; ( http://www.google.com/feedfetcher.html)", "Googlebot/2.1 ( http://www.googlebot.com/bot.html)", "Googlebot-Image/1.0", "Googlebot-News", "Googlebot-Video/1.0" };
 
 class InputParser {
-public:
-  InputParser(int& argc, char** argv) { for (int i = 1; i < argc; ++i) this->tokens.push_back(std::string(argv[i])); }
-  const std::string& get_arg(const std::string& option) {
-    std::vector<std::string>::const_iterator itr;
-    itr = std::find(this->tokens.begin(), this->tokens.end(), option);
-    if (itr != this->tokens.end() && ++itr != this->tokens.end()) return *itr;
-    return std::string("");
-  }
-  bool arg_exists(const std::string& option) { return std::find(this->tokens.begin(), this->tokens.end(), option) != this->tokens.end(); }
-private:
-  std::vector <std::string> tokens;
+  public:
+    InputParser(int& argc, char** argv) { for (int i = 1; i < argc; ++i) this->tokens.push_back(std::string(argv[i])); }
+    const std::string& get_arg(const std::string& option) {
+      std::vector<std::string>::const_iterator itr;
+      itr = std::find(this->tokens.begin(), this->tokens.end(), option);
+      if (itr != this->tokens.end() && ++itr != this->tokens.end()) return *itr;
+      return std::string("");
+    }
+    bool arg_exists(const std::string& option) { return std::find(this->tokens.begin(), this->tokens.end(), option) != this->tokens.end(); }
+  private:
+    std::vector <std::string> tokens;
 };
 
 size_t parse_response(void* ptr, size_t size, size_t count, void* stream) {
