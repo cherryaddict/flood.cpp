@@ -5,7 +5,7 @@ Usage: ./httpspam.exe [-m method] [-t count] -u target_url
 
   Options:
 
-    -m            Method(s) to use. GET | POST | GETPOST
+    -m            GET | POST | GETPOST Default: GET
     -t            Number of threads to use. Default: 12
     -u            URL to attack
 
