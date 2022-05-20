@@ -87,18 +87,15 @@ std::vector<std::string> get_fields(std::string target) {
 }
 
 void post(std::string target) {
-  std::string field_data;
+  std::string field_data = "";
   std::vector<std::string> field_names = get_fields(target);
   for (std::string& name : field_names) field_data += "&" + name + "uwu";
+  if (field_data.size()) field_data = field_data.substr(1);
   while (true) {
     CURL* curl = curl_easy_init();
     curl_easy_setopt(curl, CURLOPT_URL, target.c_str());
     curl_easy_setopt(curl, CURLOPT_POST, 1);
-    if (field_data.size()) {
-      field_data = field_data.substr(1);
-      curl_easy_setopt(curl, CURLOPT_POSTFIELDS, field_data.c_str());
-    }
-    else curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "");
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, field_data.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, parse_response);
     curl_easy_setopt(curl, CURLOPT_USERAGENT, make_user_agent().c_str());
     curl_easy_perform(curl);
