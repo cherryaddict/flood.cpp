@@ -10,7 +10,7 @@ std::string method = "get";
 std::vector<std::string> platforms = { "Macintosh", "Windows", "X11" };
 std::vector<std::string> mac = { "68K", "PPC", "Intel Mac OS X" };
 std::vector<std::string> windows = { "Win3.11", "WinNT3.51", "WinNT4.0", "Windows NT 5.0", "Windows NT 5.1", "Windows NT 5.2", "Windows NT 6.0", "Windows NT 6.1", "Windows NT 6.2", "Win 9x 4.90", "WindowsCE", "Windows XP", "Windows 7", "Windows 8", "Windows NT 10.0; Win64; x64" };
-std::vector<std::string> linux = { "Linux i686", "Linux x86_64" };
+std::vector<std::string> nix = { "Linux i686", "Linux x86_64" };
 std::vector<std::string> browsers = { "chrome", "spider", "ie" };
 std::vector<std::string> tokens = { ".NET CLR", "SV1", "Tablet PC", "Win64; IA64", "Win64; x64", "WOW64" };
 std::vector<std::string> spiders = { "AdsBot-Google ( http://www.google.com/adsbot.html)", "Baiduspider ( http://www.baidu.com/search/spider.htm)", "FeedFetcher-Google; ( http://www.google.com/feedfetcher.html)", "Googlebot/2.1 ( http://www.googlebot.com/bot.html)", "Googlebot-Image/1.0", "Googlebot-News", "Googlebot-Video/1.0" };
@@ -41,7 +41,7 @@ std::string make_user_agent() {
   std::string platform = platforms[rand() % 2 + 1];
   if (platform == "Macintosh") os = mac[rand() % 2 + 1];
   else if (platform == "Windows") os = windows[rand() % 2 + 1];
-  else if (platform == "X11") os = linux[rand() % 1 + 1];
+  else if (platform == "X11") os = nix[rand() % 1 + 1];
   browser = "chrome";
   if (browser == "chrome") {
     webkit = std::to_string(rand() % 599 + 1);
