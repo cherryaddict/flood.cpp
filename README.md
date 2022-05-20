@@ -1,7 +1,7 @@
 # httpspam.cpp
 A DDOS tool for spamming GET and/or POST requests written in C++
 ```
-Usage: ./httpspam.exe [-m method] [-t count] -u target_url
+Usage: ./httpspam [-m method] [-t count] -u target_url
 
   Options:
 
@@ -11,7 +11,7 @@ Usage: ./httpspam.exe [-m method] [-t count] -u target_url
 
   Examples:
 
-    ./httpspam.exe -u localhost
+    ./httpspam -u localhost
 
-    ./httpspam.exe -m POST -t 48 -u localhost
+    ./httpspam -m POST -t 48 -u localhost
 ```
