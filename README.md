@@ -1,7 +1,7 @@
-# httpspam.cpp
+# flood.cpp
 A DDOS tool for spamming GET and/or POST requests written in C++
 ```
-Usage: ./httpspam [-m method] [-t count] -u target_url
+Usage: ./flood [-m method] [-t count] -u target_url
 
   Options:
 
@@ -11,7 +11,7 @@ Usage: ./httpspam [-m method] [-t count] -u target_url
 
   Examples:
 
-    ./httpspam -u localhost
+    ./flood -u localhost
 
-    ./httpspam -m POST -t 48 -u localhost
+    ./flood -m POST -t 48 -u localhost
 ```
