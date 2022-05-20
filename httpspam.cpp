@@ -36,13 +36,12 @@ size_t parse_response(void* ptr, size_t size, size_t count, void* stream) {
 std::string make_user_agent() {
   std::string os;
   std::string version;
-  std::string browser;
   std::string webkit;
+  std::string browser = browsers[rand() % 2 + 1];
   std::string platform = platforms[rand() % 2 + 1];
   if (platform == "Macintosh") os = mac[rand() % 2 + 1];
   else if (platform == "Windows") os = windows[rand() % 2 + 1];
   else if (platform == "X11") os = nix[rand() % 1 + 1];
-  browser = "chrome";
   if (browser == "chrome") {
     webkit = std::to_string(rand() % 599 + 1);
     version = std::to_string(rand() % 99 + 1) + ".0" + std::to_string(rand() % 9999 + 1) + *"." + std::to_string(rand() % 999 + 1);
