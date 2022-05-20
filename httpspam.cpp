@@ -29,7 +29,7 @@ class InputParser {
     std::vector <std::string> tokens;
 };
 
-size_t parse_response(void* ptr, size_t size, size_t count, void* stream) {
+size_t swallow_response(void* ptr, size_t size, size_t count, void* stream) {
   return size * count;
 }
 
@@ -64,7 +64,7 @@ std::vector<std::string> get_fields(std::string target) {
   std::string html;
   CURL* curl = curl_easy_init();
   curl_easy_setopt(curl, CURLOPT_URL, target.c_str());
-  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, parse_response);
+  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, swallow_response);
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, &html);
   CURLcode res = curl_easy_perform(curl);
   curl_easy_cleanup(curl);
@@ -95,7 +95,7 @@ void post(std::string target) {
     curl_easy_setopt(curl, CURLOPT_URL, target.c_str());
     curl_easy_setopt(curl, CURLOPT_POST, 1);
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, field_data.c_str());
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, parse_response);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, swallow_response);
     curl_easy_setopt(curl, CURLOPT_USERAGENT, make_user_agent().c_str());
     curl_easy_perform(curl);
     curl_easy_cleanup(curl);
@@ -108,7 +108,7 @@ void get(std::string target) {
     curl_easy_setopt(curl, CURLOPT_URL, target.c_str());
     curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
     curl_easy_setopt(curl, CURLOPT_USERAGENT, make_user_agent().c_str());
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &parse_response);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &swallow_response);
     curl_easy_perform(curl);
     curl_easy_cleanup(curl);
   }
