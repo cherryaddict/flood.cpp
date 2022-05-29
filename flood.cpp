@@ -68,14 +68,20 @@ std::vector<std::string> get_fields(std::string target) {
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, &html);
   CURLcode res = curl_easy_perform(curl);
   curl_easy_cleanup(curl);
-  for (std::string::size_type i = 0; i < html.size(); i++) {
+  int size = html.size();
+  //look for input field
+  for (int i = 0; i < size; i++) {
     if (html.substr(i, 6) == "<input") {
-      for (int x = i + 6; x < html.size(); x++) {
+      //found input field, look found name attribute
+      for (int x = i + 6; x < size; x++) {
         if (html.substr(x, 5) == "name=") {
-          for (int n = x + 6; n < html.size(); n++) {
+          //found name attribute, count its value's length and grab it with substr
+          for (int n = x + 6; n < size; n++) {
             if (html.substr(n, 1) == "\"" || html.substr(n, 1) == "'") {
               field_names.push_back(html.substr(x + 6, n - (x + 6)));
-              n = html.size();
+              //end inner loops to start looking for next input field
+              n = size;
+              x = size;
             }
           }
         }
@@ -115,6 +121,7 @@ void get(std::string target) {
 }
 
 int main(int argc, char* argv[]) {
+  srand(time(NULL));
   curl_global_init(CURL_GLOBAL_ALL);
   std::string target;
   InputParser input(argc, argv);
@@ -130,9 +137,7 @@ int main(int argc, char* argv[]) {
       thread_vector.push_back(std::thread(get, target));
       thread_vector.push_back(std::thread(post, target));
     }
-    else if (method == "post") {
-      thread_vector.push_back(std::thread(post, target));
-    }
+    else if (method == "post") thread_vector.push_back(std::thread(post, target));
     else thread_vector.push_back(std::thread(get, target));
   }
   for (std::thread& thread : thread_vector) if (thread.joinable()) thread.join();
