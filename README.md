@@ -1,6 +1,8 @@
 # flood.cpp
 A DDOS tool for spamming GET and/or POST requests written in C++
 ```
+Compile: g++ flood.cpp -pthread -lcurl -o flood
+
 Usage: ./flood [-m method] [-t count] -u target_url
 
   Options:
